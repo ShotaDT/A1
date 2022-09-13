@@ -3,17 +3,17 @@
 1)
 $ mkdir A1
 
-2)
+2) /home/shota
 $ echo $HOME
 >> /home/shota
 
-3)
+3) My UID is 1016
 $ id -u shota
 >> 1016
 $ groups
 >> shota
 
-4)cd, ls, create files under it all denied.
+4)cd, ls, create files under it are all denied.
 $ mkdir temp
 $ chmod 600 temp/
 $ ls -latr
@@ -26,6 +26,7 @@ ls: cannot access 'temp/..': Permission denied
 total 0
 d????????? ? ? ? ?            ? ..
 d????????? ? ? ? ?            ? .
+
 $ touch ~/A1/temp/b.txt
 >> touch: cannot touch '/home/shota/A1/temp/b.txt': Permission denied
 
@@ -37,7 +38,6 @@ $ mkdir temp3
 $ mv temp2 temp3
 $ cp -R temp2 temp3
 
-mv is allowed, but in order to cp, the option '-R' is needed
 
 6)'/proc/meminfo' and '/proc/cpuinfo' contains information about memory and cpu.
 $ls -latr /proc/ | grep cpu
@@ -99,10 +99,6 @@ L1i cache:           32K
 NUMA node0 CPU(s):   0-71,80-87,96-103,112-119,128-135,144-151,160-167,176-183,192-199,208-215,224-231,240-247
 NUMA node1 CPU(s):   72-79,88-95,104-111,120-127,136-143,152-159,168-175,184-191,200-207,216-223,232-239,248-255
 
-256 processors are on my server.
-The processor architecture and model name is ppc641le POWER8 model
-The processor speed in GHz is 3.52GHz
-
 
 9)The file has 110350 lines and its size is 7.5MB so in GB, 0,0075GB
 I named the csv file 'hashtag.csv'
@@ -115,12 +111,13 @@ $ ls -lah
 
 The file has 110350 lines and its size is 7.5MB so in GB, 0,0075GB
 
-10)
+10)57 words "great"(case-insensitive)
+
 $ grep -i great hashtag.csv | wc -l
 >> 57
-57 words "great"(case-insensitive)
 
-11)
+11) UTF-8 Unicode text
+
 $ file hashtag.csv
 >> hashtag.csv: UTF-8 Unicode text
 
@@ -130,6 +127,10 @@ $ file hashtag_ascii.csv
 >> hastag_ascii.csv: ASCII text
 
 13)
+unique users: 176
+unique tweets: 64697
+unique hashtags: 20281
+
 $ head -1 hashtag.csv
 >> author,hashtags,date,id
 
@@ -142,6 +143,3 @@ $awk -F ',' '{print $4}' hashtag.csv | tail -n +2  | sort | uniq | wc -l
 $ awk -F ',' '{print $2}' hashtag.csv | tail -n +2 | sort | uniq | wc -l 
 >> 20281
 
-unique users: 176
-unique tweets:64697
-unique hashtags:20281
